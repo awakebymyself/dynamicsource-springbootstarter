@@ -54,6 +54,10 @@ public class DataSourceContext {
     }
 
     public static void setSlaveDsKeys(Collection<String> keys) {
+        if (keys == null || keys.isEmpty()) {
+            LOGGER.warn("No slave data sources can be found!");
+            return;
+        }
         slaveDsKeys.addAll(keys);
     }
 

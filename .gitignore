@@ -1,4 +1,3 @@
-# Created by .ignore support plugin (hsz.mobi)
-/.idea/
-/target/
-/dynamicsource-springbootstarter.iml
+*.idea
+*.iml
+/**/target

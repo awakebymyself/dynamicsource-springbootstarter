@@ -17,7 +17,7 @@ public class DynamicDsProperties {
 
     private String masterJdbcDriver;
 
-
+    private String className;
     ///
     private String slaveUrl;
 
@@ -29,7 +29,13 @@ public class DynamicDsProperties {
 
     private String slaveJdbcDriver;
 
+    public String getClassName() {
+        return className;
+    }
 
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     public String getPointCut() {
         return pointCut;
