@@ -1,0 +1,7 @@
+/home/jack/dynamicsource-springbootstarter/src/main/java/com/lzg/dynamicsource/DynamicDSAutoConfiguration.java
+/home/jack/dynamicsource-springbootstarter/src/main/java/com/lzg/dynamicsource/DataSourceImportRegistrar.java
+/home/jack/dynamicsource-springbootstarter/src/main/java/com/lzg/dynamicsource/config/DataSourceContext.java
+/home/jack/dynamicsource-springbootstarter/src/main/java/com/lzg/dynamicsource/EnableDynamicDS.java
+/home/jack/dynamicsource-springbootstarter/src/main/java/com/lzg/dynamicsource/DynamicDataSource.java
+/home/jack/dynamicsource-springbootstarter/src/main/java/com/lzg/dynamicsource/DynamicDsProperties.java
+/home/jack/dynamicsource-springbootstarter/src/main/java/com/lzg/dynamicsource/config/DaoMapperAdvice.java
