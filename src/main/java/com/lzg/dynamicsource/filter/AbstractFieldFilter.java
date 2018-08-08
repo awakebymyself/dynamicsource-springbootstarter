@@ -52,7 +52,7 @@ public abstract class AbstractFieldFilter {
 
     protected abstract boolean canHandle(Field field);
 
-    private void doFilter(Field field) {
+    protected void doFilter(Field field) {
         dbObjectMap.putIfAbsent(prefix, new DbObject());
         DbObject dbObject = dbObjectMap.get(prefix);
 
