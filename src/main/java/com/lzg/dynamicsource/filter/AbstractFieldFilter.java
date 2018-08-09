@@ -4,20 +4,18 @@ import com.lzg.dynamicsource.regist.DbObject;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Optional;
+
+import static com.lzg.dynamicsource.config.Constants.*;
 
 /**
  * @author 刘志钢
  */
 public abstract class AbstractFieldFilter {
 
-    private static final String URL_SUFFIX = "Url";
-    private static final String USER_SUFFIX = "User";
-    private static final String PASS_SUFFIX = "Password";
-    private static final String DRIVER_SUFFIX = "Driver";
-
     private final Object object;
     final String prefix;
-    private final Map<String, DbObject> dbObjectMap;
+    protected final Map<String, DbObject> dbObjectMap;
 
     private AbstractFieldFilter nextFilter;
 
@@ -35,18 +33,18 @@ public abstract class AbstractFieldFilter {
         }
     }
 
-    String getFieldValuePerSuffix(Field field, String suffix) {
+    Optional<String> getFieldValuePerSuffix(Field field, String suffix) {
         if (field.getName().endsWith(suffix)) {
             if (!field.isAccessible()) {
                 field.setAccessible(true);
             }
             try {
-                return (String) field.get(object);
+                return Optional.of((String) field.get(object));
             } catch (IllegalAccessException e) {
                 System.out.println("====================");
             }
         }
-        return null;
+        return Optional.empty();
     }
 
 
@@ -56,10 +54,14 @@ public abstract class AbstractFieldFilter {
         dbObjectMap.putIfAbsent(prefix, new DbObject());
         DbObject dbObject = dbObjectMap.get(prefix);
 
-        dbObject.setDriver(getFieldValuePerSuffix(field, DRIVER_SUFFIX));
-        dbObject.setPassword(getFieldValuePerSuffix(field, PASS_SUFFIX));
-        dbObject.setUser(getFieldValuePerSuffix(field, USER_SUFFIX));
-        dbObject.setUrl(getFieldValuePerSuffix(field, URL_SUFFIX));
+        setFiledValue(field, dbObject);
+    }
+
+    void setFiledValue(Field field, DbObject dbObject) {
+        getFieldValuePerSuffix(field, DRIVER_SUFFIX).ifPresent(dbObject::setDriver);
+        getFieldValuePerSuffix(field, PASS_SUFFIX).ifPresent(dbObject::setPassword);
+        getFieldValuePerSuffix(field, USER_SUFFIX).ifPresent(dbObject::setUser);
+        getFieldValuePerSuffix(field, URL_SUFFIX).ifPresent(dbObject::setUrl);
     }
 
     void setNextFilter(AbstractFieldFilter nextFilter) {

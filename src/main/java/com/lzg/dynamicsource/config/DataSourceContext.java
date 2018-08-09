@@ -3,6 +3,7 @@ package com.lzg.dynamicsource.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -20,19 +21,20 @@ public class DataSourceContext {
 
     private static final ThreadLocal<String> dataSource = ThreadLocal.withInitial(() -> DEFAULT_DATA_SOURCE);
 
-    private static AtomicReference<String> masterDataSource = new AtomicReference<>(DEFAULT_DATA_SOURCE);
+    private static String masterDataSource = DEFAULT_DATA_SOURCE;
 
     // 从数据源对应的keys
-    private static final List<String> slaveDsKeys = new CopyOnWriteArrayList<>();
+    private static final List<String> slaveDsKeys = new ArrayList<>();
 
     private static final AtomicLong counter = new AtomicLong(0);
 
+    // 走主数据源
     public static void useMasterDataSource() {
-        LOGGER.info("Use master dataSource");
-        dataSource.set(masterDataSource.get());
+        LOGGER.debug("Use master dataSource");
+        dataSource.set(masterDataSource);
     }
 
-
+    // 走从数据源
     public static void useSlaveDataSource() {
         LOGGER.info("Use slave data source!");
 
@@ -50,7 +52,7 @@ public class DataSourceContext {
     }
 
     public static void setMasterDataSource(String masterDs) {
-        masterDataSource.updateAndGet(v -> masterDs);
+        masterDataSource = masterDs;
     }
 
     public static void setSlaveDsKeys(Collection<String> keys) {
