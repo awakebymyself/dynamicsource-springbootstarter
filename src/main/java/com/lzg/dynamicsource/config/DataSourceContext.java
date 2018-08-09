@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 持有当前线程所拥有的数据源
@@ -19,7 +17,7 @@ public class DataSourceContext {
 
     private static final String DEFAULT_DATA_SOURCE = "master";
 
-    private static final ThreadLocal<String> dataSource = ThreadLocal.withInitial(() -> DEFAULT_DATA_SOURCE);
+    private static final ThreadLocal<String> DATA_SOURCE = ThreadLocal.withInitial(() -> DEFAULT_DATA_SOURCE);
 
     private static String masterDataSource = DEFAULT_DATA_SOURCE;
 
@@ -30,8 +28,8 @@ public class DataSourceContext {
 
     // 走主数据源
     public static void useMasterDataSource() {
-        LOGGER.debug("Use master dataSource");
-        dataSource.set(masterDataSource);
+        LOGGER.debug("Use master DATA_SOURCE");
+        DATA_SOURCE.set(masterDataSource);
     }
 
     // 走从数据源
@@ -43,12 +41,12 @@ public class DataSourceContext {
         try {
             dataSourceKey = slaveDsKeys.get(index);
         } catch (RuntimeException e) {
-            LOGGER.warn("Error occurs when switch slave dataSource, change to master");
+            LOGGER.warn("Error occurs when switch slave DATA_SOURCE, change to master");
             useMasterDataSource();
             return;
         }
         counter.incrementAndGet();
-        dataSource.set(dataSourceKey);
+        DATA_SOURCE.set(dataSourceKey);
     }
 
     public static void setMasterDataSource(String masterDs) {
@@ -63,12 +61,16 @@ public class DataSourceContext {
         slaveDsKeys.addAll(keys);
     }
 
+    public static void setDataSource(String dataSource) {
+        DATA_SOURCE.set(dataSource);
+    }
+
     public static String getDataSource() {
-        return dataSource.get();
+        return DATA_SOURCE.get();
     }
 
     public static void clear() {
-        dataSource.remove();
+        DATA_SOURCE.remove();
     }
 
 

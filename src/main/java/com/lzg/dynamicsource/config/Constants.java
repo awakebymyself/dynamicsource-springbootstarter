@@ -13,5 +13,6 @@ public class Constants {
     public static final String MASTER_PREFIX = "master";
     public static final String SLAVE_PREFIX = "slave";
 
+    public static final String[] READ_DATASOURCE_PREFIX = {"select", "get", "query", "find"};
 
 }
