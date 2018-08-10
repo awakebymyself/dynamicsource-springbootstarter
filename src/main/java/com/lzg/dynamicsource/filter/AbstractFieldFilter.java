@@ -52,7 +52,6 @@ public abstract class AbstractFieldFilter {
         return Optional.empty();
     }
 
-
     protected abstract boolean canHandle(Field field);
 
     protected void doFilter(Field field) {

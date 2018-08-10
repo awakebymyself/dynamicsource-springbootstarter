@@ -35,7 +35,7 @@ public class DataSourceContext {
     }
 
     public static void useReadDataSource() {
-        LOGGER.info("Use read data source!");
+        LOGGER.debug("Use read data source!");
 
         int index = counter.intValue() % readDsKeys.size();
         String dataSourceKey;
