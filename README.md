@@ -124,7 +124,7 @@ dynamic.ds.enable=true
 在`@Configuration` 中增加`@Bean` 配置：
 
 ```java
- @Bean
+    @Bean
     public DynamicDsRegister register() {
         return new DynamicDsRegister(xxx.class); //注意这边的xxx.class及为上面disconf托管的配置类！
     }
