@@ -22,6 +22,7 @@ import javax.sql.DataSource;
 @ConditionalOnProperty(prefix = "dynamic.ds", name = "enable", havingValue = "true")
 public class DynamicDSAutoConfiguration {
 
+
     @Autowired
     private DynamicDsProperties dsProperties;
 
@@ -35,9 +36,23 @@ public class DynamicDSAutoConfiguration {
     }
 
     private DataSource defaultDataSource() {
-        DruidDataSource druidDataSource = new DruidDataSource();
+        DruidDataSource dataSource = new DruidDataSource();
 
-        return druidDataSource;
+        dataSource.setUrl("");
+        dataSource.setUsername("");
+        dataSource.setPassword("");
+        dataSource.setDriverClassName("");
+        //configuration
+        dataSource.setInitialSize(20);
+        dataSource.setMinIdle(10);
+        dataSource.setMaxActive(500);
+        dataSource.setTimeBetweenEvictionRunsMillis(60000);
+        dataSource.setMinEvictableIdleTimeMillis(300000);
+        dataSource.setValidationQuery("select 'X'");
+        dataSource.setTestWhileIdle(true);
+        dataSource.setTestOnBorrow(false);
+
+        return dataSource;
     }
 
     @Bean
