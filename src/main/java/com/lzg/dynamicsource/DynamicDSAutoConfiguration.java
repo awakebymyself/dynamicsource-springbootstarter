@@ -2,7 +2,6 @@ package com.lzg.dynamicsource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.lzg.dynamicsource.config.DaoMapperAdvice;
-import com.lzg.dynamicsource.regist.DbObject;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;

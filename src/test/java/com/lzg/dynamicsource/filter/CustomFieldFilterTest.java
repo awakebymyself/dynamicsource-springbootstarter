@@ -11,7 +11,7 @@ public class CustomFieldFilterTest {
 
     @Test
     public void regexTest() {
-        String tested = "masterDriver";
+        String tested = "masterWriteDriver";
         Matcher matcher = CustomFieldFilter.PATTERN.matcher(tested);
 
         System.out.println(matcher.matches());

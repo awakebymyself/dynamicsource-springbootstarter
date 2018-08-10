@@ -7,8 +7,6 @@ import org.junit.Test;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 /**
  * @author 刘志钢
  */
@@ -17,17 +15,17 @@ public class FieldFilterChainTest {
     @Test
     public void parseFields() {
         TestObject testObject = new TestObject();
-        testObject.setAlphaUrl("alphaUrl");
+        testObject.setAlphaWriteUrl("alphaWriteUrl");
         testObject.setMasterUrl("masterUrl");
-        testObject.setBetaUser("betaUser");
+        testObject.setBetaReadUser("betaReadUser");
         testObject.setSlaveDriver("slaveDriver");
-        testObject.setAlphaDriver("alphaDriver");
+        testObject.setAlphaWriteDriver("alphaWriteDriver");
 
         Field[] fields = testObject.getClass().getDeclaredFields();
         Map<String, DbObject> dbObjectMap = FieldFilterChain.parseFields(fields, testObject);
 
         Assert.assertEquals(4, dbObjectMap.size());
-        Assert.assertEquals("alphaDriver", dbObjectMap.get("alpha").getDriver());
+        Assert.assertEquals("alphaWriteDriver", dbObjectMap.get("alphaWrite").getDriver());
     }
 
 
@@ -36,17 +34,17 @@ public class FieldFilterChainTest {
 
         private String slaveDriver;
 
-        private String alphaUrl;
-        private String alphaDriver;
+        private String alphaWriteUrl;
+        private String alphaWriteDriver;
 
-        private String betaUser;
+        private String betaReadUser;
 
-        public String getAlphaDriver() {
-            return alphaDriver;
+        public String getAlphaWriteDriver() {
+            return alphaWriteDriver;
         }
 
-        public void setAlphaDriver(String alphaDriver) {
-            this.alphaDriver = alphaDriver;
+        public void setAlphaWriteDriver(String alphaWriteDriver) {
+            this.alphaWriteDriver = alphaWriteDriver;
         }
 
         public String getMasterUrl() {
@@ -65,20 +63,20 @@ public class FieldFilterChainTest {
             this.slaveDriver = slaveDriver;
         }
 
-        public String getAlphaUrl() {
-            return alphaUrl;
+        public String getAlphaWriteUrl() {
+            return alphaWriteUrl;
         }
 
-        public void setAlphaUrl(String alphaUrl) {
-            this.alphaUrl = alphaUrl;
+        public void setAlphaWriteUrl(String alphaWriteUrl) {
+            this.alphaWriteUrl = alphaWriteUrl;
         }
 
-        public String getBetaUser() {
-            return betaUser;
+        public String getBetaReadUser() {
+            return betaReadUser;
         }
 
-        public void setBetaUser(String betaUser) {
-            this.betaUser = betaUser;
+        public void setBetaReadUser(String betaReadUser) {
+            this.betaReadUser = betaReadUser;
         }
     }
 }

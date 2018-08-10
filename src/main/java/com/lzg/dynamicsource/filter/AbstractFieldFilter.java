@@ -1,9 +1,12 @@
 package com.lzg.dynamicsource.filter;
 
 import com.lzg.dynamicsource.regist.DbObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.lzg.dynamicsource.config.Constants.*;
@@ -12,6 +15,8 @@ import static com.lzg.dynamicsource.config.Constants.*;
  * @author 刘志钢
  */
 public abstract class AbstractFieldFilter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFieldFilter.class);
 
     private final Object object;
     final String prefix;
@@ -41,7 +46,7 @@ public abstract class AbstractFieldFilter {
             try {
                 return Optional.of((String) field.get(object));
             } catch (IllegalAccessException e) {
-                System.out.println("====================");
+                LOGGER.error("Error occurs when set field value", e);
             }
         }
         return Optional.empty();
@@ -53,15 +58,19 @@ public abstract class AbstractFieldFilter {
     protected void doFilter(Field field) {
         dbObjectMap.putIfAbsent(prefix, new DbObject());
         DbObject dbObject = dbObjectMap.get(prefix);
-
-        setFiledValue(field, dbObject);
+        String writeOrRead = null;
+        if (Objects.equals(MASTER_PREFIX, prefix)) {
+            writeOrRead = WRITE_DATASOURCE;
+        }
+        setFiledValue(field, dbObject, writeOrRead);
     }
 
-    void setFiledValue(Field field, DbObject dbObject) {
+    void setFiledValue(Field field, DbObject dbObject, String writeOrRead) {
         getFieldValuePerSuffix(field, DRIVER_SUFFIX).ifPresent(dbObject::setDriver);
         getFieldValuePerSuffix(field, PASS_SUFFIX).ifPresent(dbObject::setPassword);
         getFieldValuePerSuffix(field, USER_SUFFIX).ifPresent(dbObject::setUser);
         getFieldValuePerSuffix(field, URL_SUFFIX).ifPresent(dbObject::setUrl);
+        dbObject.setWrite(Objects.equals(WRITE_DATASOURCE, writeOrRead));
     }
 
     void setNextFilter(AbstractFieldFilter nextFilter) {

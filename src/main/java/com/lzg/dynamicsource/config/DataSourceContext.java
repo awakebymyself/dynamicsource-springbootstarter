@@ -21,47 +21,55 @@ public class DataSourceContext {
 
     private static String masterDataSource = DEFAULT_DATA_SOURCE;
 
-    // 从数据源对应的keys
-    private static final List<String> slaveDsKeys = new ArrayList<>();
+    //写数据源对应的keys
+    private static final List<String> writeDsKeys = new ArrayList<>();
+
+    // 读数据源对应的keys
+    private static final List<String> readDsKeys = new ArrayList<>();
 
     private static final AtomicLong counter = new AtomicLong(0);
 
-    // 走主数据源
-    public static void useMasterDataSource() {
-        LOGGER.debug("Use master DATA_SOURCE");
-        DATA_SOURCE.set(masterDataSource);
+    public static void useWriteDataSource() {
+        LOGGER.debug("Use write DATA_SOURCE");
+        DATA_SOURCE.set(writeDsKeys.get(0));
     }
 
-    // 走从数据源
-    public static void useSlaveDataSource() {
-        LOGGER.info("Use slave data source!");
+    public static void useReadDataSource() {
+        LOGGER.info("Use read data source!");
 
-        int index = counter.intValue() % slaveDsKeys.size();
+        int index = counter.intValue() % readDsKeys.size();
         String dataSourceKey;
         try {
-            dataSourceKey = slaveDsKeys.get(index);
+            dataSourceKey = readDsKeys.get(index);
         } catch (RuntimeException e) {
-            LOGGER.warn("Error occurs when switch slave DATA_SOURCE, change to master");
-            useMasterDataSource();
+            LOGGER.warn("Error occurs when switch read DATA_SOURCE, change to write");
+            useWriteDataSource();
             return;
         }
         counter.incrementAndGet();
         DATA_SOURCE.set(dataSourceKey);
     }
 
-    public static void setMasterDataSource(String masterDs) {
-        masterDataSource = masterDs;
-    }
-
-    public static void setSlaveDsKeys(Collection<String> keys) {
+    public static void setReadDsKeys(Collection<String> keys) {
         if (keys == null || keys.isEmpty()) {
-            LOGGER.warn("No slave data sources can be found!");
+            LOGGER.warn("No read data source keys can be found!");
             return;
         }
-        slaveDsKeys.addAll(keys);
+        readDsKeys.addAll(keys);
+    }
+
+    public static void setWriteDsKeys(Collection<String> keys) {
+        if (keys == null || keys.isEmpty()) {
+            LOGGER.warn("No write data source keys can be found!");
+            return;
+        }
+        writeDsKeys.addAll(keys);
     }
 
     public static void setDataSource(String dataSource) {
+        if (!writeDsKeys.contains(dataSource) && !readDsKeys.contains(dataSource)) {
+            throw new IllegalStateException("DataSource key doesn't exist!");
+        }
         DATA_SOURCE.set(dataSource);
     }
 

@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static com.lzg.dynamicsource.config.Constants.READ_DATASOURCE_PREFIX;
 
@@ -27,9 +26,9 @@ public class DaoMapperAdvice implements MethodInterceptor {
             String methodName = method.getName();
             Optional<String> any = Arrays.stream(READ_DATASOURCE_PREFIX).filter(methodName::startsWith).findAny();
             if (any.isPresent()) {
-                DataSourceContext.useSlaveDataSource();
+                DataSourceContext.useReadDataSource();
             } else {
-                DataSourceContext.useMasterDataSource();
+                DataSourceContext.useWriteDataSource();
             }
         }
         LOGGER.debug("Use DataSource : {}", DataSourceContext.getDataSource());

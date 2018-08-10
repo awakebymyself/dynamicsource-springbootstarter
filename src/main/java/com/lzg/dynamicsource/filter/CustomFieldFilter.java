@@ -18,7 +18,7 @@ import static com.lzg.dynamicsource.config.Constants.*;
  */
 public class CustomFieldFilter extends AbstractFieldFilter {
 
-    static final Pattern PATTERN = Pattern.compile("([a-zA-Z]+)(Url|Driver|Password|User)$");
+    static final Pattern PATTERN = Pattern.compile("([a-zA-Z]+)(Write|Read)(Url|Driver|Password|User)$");
 
     public CustomFieldFilter(Object object, Field[] fields, Map<String, DbObject> dbObjectMap) {
         this("custom", object, dbObjectMap, fields);
@@ -39,12 +39,14 @@ public class CustomFieldFilter extends AbstractFieldFilter {
     protected void doFilter(Field field) {
         Matcher matcher = PATTERN.matcher(field.getName());
         if (matcher.matches()) {
-            String prefix = matcher.group(1);
-            DbObject dbObject = dbObjectMap.get(prefix);
+            String key = matcher.group(1);
+            String writeOrRead = matcher.group(2);
 
-            setFiledValue(field, dbObject);
+            DbObject dbObject = dbObjectMap.get(key + writeOrRead);
+            setFiledValue(field, dbObject, writeOrRead);
         } else {
-            throw new IllegalStateException("Field :" + field.getName() + " name is not valid!");
+            throw new IllegalStateException("Field :" + field.getName() + " name is not valid, name " +
+                    "must be xxxWrite(Read)Url or something that");
         }
     }
 
@@ -56,7 +58,9 @@ public class CustomFieldFilter extends AbstractFieldFilter {
                 .collect(Collectors.groupingBy(f -> {
                     Matcher matcher = PATTERN.matcher(f.getName());
                     if (matcher.matches()) {
-                        return matcher.group(1);
+                        String key = matcher.group(1);
+                        String writeOrRead = matcher.group(2);
+                        return key +writeOrRead; //e.g. mapKey = alphaWrite
                     }
                     throw new IllegalStateException("Field :" + f.getName() + " name is not valid!");
                 }, Collectors.toList()));

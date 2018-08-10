@@ -1,5 +1,7 @@
 package com.lzg.dynamicsource.regist;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * @author 刘志钢
  */
@@ -8,7 +10,7 @@ public class DbObject {
     private String user;
     private String password;
     private String driver;
-    private boolean master;
+    private boolean write;
     private String url;
 
     public String getUrl() {
@@ -43,11 +45,23 @@ public class DbObject {
         this.driver = driver;
     }
 
-    public boolean isMaster() {
-        return master;
+    public boolean isWrite() {
+        return write;
     }
 
-    public void setMaster(boolean master) {
-        this.master = master;
+    public void setWrite(boolean write) {
+        this.write = write;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("DbObject{");
+        sb.append("user='").append(user).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", driver='").append(driver).append('\'');
+        sb.append(", write=").append(write);
+        sb.append(", url='").append(url).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
