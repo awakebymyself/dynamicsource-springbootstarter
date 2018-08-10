@@ -154,7 +154,7 @@ xxxWrite(Url|Driver|Password) write为保留字, xxx即为写数据源名称
 
   private String ***ReadUrl,***ReadUser... 读配置2
   ```
-走读库的时候使用轮训算法，顺序使用多读源
+方法不添加注解的时候根据方法名前缀判断是否走读库(query|select|find|get)开头，走读库的时候使用轮询算法，顺序使用多读源
 
 
  2. 多写多读（不同库）:
@@ -166,7 +166,7 @@ xxxWrite(Url|Driver|Password) write为保留字, xxx即为写数据源名称
  private String ***ReadUrl,***ReadUser... 读配置2 对应数据源名称为***Read
  ```
 
-对于不同库多写多读的情况，无法区别使用哪一个数据源，所有需要在方法层面指定：
+对于不同库多写多读的情况，无法区别使用哪一个数据源，所有需要在方法层面通过注解指定数据源名称：
 ```java
   @DynamicDS("xxxWrite") 指定需要使用的数据源名称
     public String hello() {

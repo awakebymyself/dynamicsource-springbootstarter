@@ -19,8 +19,6 @@ public class DataSourceContext {
 
     private static final ThreadLocal<String> DATA_SOURCE = ThreadLocal.withInitial(() -> DEFAULT_DATA_SOURCE);
 
-    private static String masterDataSource = DEFAULT_DATA_SOURCE;
-
     //写数据源对应的keys
     private static final List<String> writeDsKeys = new ArrayList<>();
 
