@@ -1,8 +1,12 @@
 package com.lzg.dynamicsource.filter;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;
+
+import static com.lzg.dynamicsource.config.Constants.PATTERN;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author 刘志钢
@@ -10,14 +14,13 @@ import java.util.regex.Matcher;
 public class CustomFieldFilterTest {
 
     @Test
-    public void regexTest() {
+     void regexTest() {
         String tested = "masterWriteDriver";
-        Matcher matcher = CustomFieldFilter.PATTERN.matcher(tested);
+        Matcher matcher = PATTERN.matcher(tested);
 
         System.out.println(matcher.matches());
-        if (matcher.matches()) {
-            System.out.println(matcher.group(1));
-        }
+        assertEquals("master", matcher.group(1));
+        assertEquals("Write", matcher.group(2));
     }
 
 }

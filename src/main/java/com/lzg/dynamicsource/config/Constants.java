@@ -1,5 +1,7 @@
 package com.lzg.dynamicsource.config;
 
+import java.util.regex.Pattern;
+
 /**
  * @author 刘志钢
  */
@@ -17,5 +19,7 @@ public class Constants {
     public static final String Read_DATASOURCE = "Read";
 
     public static final String[] READ_DATASOURCE_PREFIX = {"select", "get", "query", "find"};
+
+    public static final Pattern PATTERN = Pattern.compile("([a-zA-Z]+)(Write|Read)(Url|Driver|Password|User)$");
 
 }

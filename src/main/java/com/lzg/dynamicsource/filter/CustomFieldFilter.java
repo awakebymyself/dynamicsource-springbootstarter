@@ -4,7 +4,6 @@ import com.lzg.dynamicsource.regist.DbObject;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -18,7 +17,6 @@ import static com.lzg.dynamicsource.config.Constants.*;
  */
 public class CustomFieldFilter extends AbstractFieldFilter {
 
-    static final Pattern PATTERN = Pattern.compile("([a-zA-Z]+)(Write|Read)(Url|Driver|Password|User)$");
 
     public CustomFieldFilter(Object object, Field[] fields, Map<String, DbObject> dbObjectMap) {
         this("custom", object, dbObjectMap, fields);
