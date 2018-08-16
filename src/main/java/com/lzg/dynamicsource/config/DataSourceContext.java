@@ -1,5 +1,6 @@
 package com.lzg.dynamicsource.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +16,11 @@ public class DataSourceContext {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceContext.class);
 
-    private static final String DEFAULT_DATA_SOURCE = "master";
+    private static String DEFAULT_WRITE_DATA_SOURCE = "";
+    private static String DEFAULT_READ_DATA_SOURCE = "";
 
-    private static final ThreadLocal<String> DATA_SOURCE = ThreadLocal.withInitial(() -> DEFAULT_DATA_SOURCE);
+    private static final ThreadLocal<String> DATA_SOURCE = ThreadLocal.withInitial(()
+            -> DEFAULT_WRITE_DATA_SOURCE);
 
     //写数据源对应的keys
     private static final List<String> writeDsKeys = new ArrayList<>();
@@ -27,25 +30,33 @@ public class DataSourceContext {
 
     private static final AtomicLong counter = new AtomicLong(0);
 
-    public static void useWriteDataSource() {
-        LOGGER.debug("Use write DATA_SOURCE");
-        DATA_SOURCE.set(writeDsKeys.get(0));
+    public static void useDefaultWriteDs() {
+        LOGGER.debug("Use default write DATA_SOURCE");
+        if (StringUtils.isNotBlank(DEFAULT_WRITE_DATA_SOURCE)) {
+            DATA_SOURCE.set(DEFAULT_WRITE_DATA_SOURCE);
+        } else {
+            DATA_SOURCE.set(writeDsKeys.stream().findFirst().get());
+        }
     }
 
     public static void useReadDataSource() {
         LOGGER.debug("Use read data source!");
 
-        int index = counter.intValue() % readDsKeys.size();
-        String dataSourceKey;
-        try {
-            dataSourceKey = readDsKeys.get(index);
-        } catch (RuntimeException e) {
-            LOGGER.warn("Error occurs when switch read DATA_SOURCE, change to write");
-            useWriteDataSource();
-            return;
+        if (StringUtils.isNotBlank(DEFAULT_READ_DATA_SOURCE)) {
+            DATA_SOURCE.set(DEFAULT_READ_DATA_SOURCE);
+        } else {
+            int index = counter.intValue() % readDsKeys.size();
+            String dataSourceKey;
+            try {
+                dataSourceKey = readDsKeys.get(index);
+            } catch (RuntimeException e) {
+                LOGGER.warn("Error occurs when switch read DATA_SOURCE, change to write");
+                useDefaultWriteDs();
+                return;
+            }
+            counter.incrementAndGet();
+            DATA_SOURCE.set(dataSourceKey);
         }
-        counter.incrementAndGet();
-        DATA_SOURCE.set(dataSourceKey);
     }
 
     public static void setReadDsKeys(Collection<String> keys) {
@@ -69,6 +80,10 @@ public class DataSourceContext {
             throw new IllegalStateException("DataSource key doesn't exist!");
         }
         DATA_SOURCE.set(dataSource);
+    }
+
+    public static void setDefaultWriteDataSource(String defaultWriteDataSource) {
+        DEFAULT_WRITE_DATA_SOURCE = defaultWriteDataSource;
     }
 
     public static String getDataSource() {

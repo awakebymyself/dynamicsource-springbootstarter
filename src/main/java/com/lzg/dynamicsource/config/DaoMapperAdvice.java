@@ -28,7 +28,7 @@ public class DaoMapperAdvice implements MethodInterceptor {
             if (any.isPresent()) {
                 DataSourceContext.useReadDataSource();
             } else {
-                DataSourceContext.useWriteDataSource();
+                DataSourceContext.useDefaultWriteDs();
             }
         }
         LOGGER.debug("Use DataSource : {}", DataSourceContext.getDataSource());
