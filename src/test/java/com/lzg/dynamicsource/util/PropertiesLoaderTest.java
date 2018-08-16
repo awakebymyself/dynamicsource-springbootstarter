@@ -33,7 +33,7 @@ class PropertiesLoaderTest {
     @Disabled
     void loadPropertiesFromExternal() {
         System.setProperty("dynamic.path","C:\\usr\\local\\config\\dynamic.properties");
-        
+
         loadDynamicFile();
     }
 

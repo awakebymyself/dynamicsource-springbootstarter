@@ -22,11 +22,7 @@ public class FieldFilterChain {
     }
 
     private static AbstractFieldFilter assemble(Object object, Map<String, DbObject> dbObjectMap, Field[] fields) {
-        MasterFieldFilter masterFieldFilter = new MasterFieldFilter(object, dbObjectMap);
-        SlaveFieldFilter slaveFieldFilter = new SlaveFieldFilter(object, dbObjectMap);
-        masterFieldFilter.setNextFilter(slaveFieldFilter);
-        slaveFieldFilter.setNextFilter(new CustomFieldFilter(object, fields, dbObjectMap));
-        return masterFieldFilter;
+        return new CustomFieldFilter(object, fields, dbObjectMap);
     }
 
 }
