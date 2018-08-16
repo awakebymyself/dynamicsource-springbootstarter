@@ -1,6 +1,7 @@
 package com.lzg.dynamicsource.util;
 
 import com.lzg.dynamicsource.regist.DbObject;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -29,10 +30,10 @@ class PropertiesLoaderTest {
 
     @Test
     @Tag("external")
+    @Disabled
     void loadPropertiesFromExternal() {
         System.setProperty("dynamic.path","C:\\usr\\local\\config\\dynamic.properties");
-
-
+        
         loadDynamicFile();
     }
 
