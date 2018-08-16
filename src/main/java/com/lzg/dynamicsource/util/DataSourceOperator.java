@@ -50,6 +50,15 @@ public class DataSourceOperator {
         dataSource.setUsername(requireNonNull(dbObject.getUser()));
         dataSource.setPassword(requireNonNull(dbObject.getPassword()));
 
+        //configuration
+        dataSource.setInitialSize(20);
+        dataSource.setMinIdle(10);
+        dataSource.setMaxActive(500);
+        dataSource.setTimeBetweenEvictionRunsMillis(60000);
+        dataSource.setMinEvictableIdleTimeMillis(300000);
+        dataSource.setValidationQuery("select 'X'");
+        dataSource.setTestWhileIdle(true);
+        dataSource.setTestOnBorrow(false);
         return dataSource;
     }
 

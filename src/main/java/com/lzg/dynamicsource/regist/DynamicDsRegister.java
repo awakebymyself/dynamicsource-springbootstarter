@@ -17,9 +17,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * @author 刘志钢
@@ -62,7 +61,7 @@ public class DynamicDsRegister implements BeanDefinitionRegistryPostProcessor, A
 
             DataSource dataSource = dataSourcePair.getLeft().get(writeDs);
             if (dataSource == null) {
-                throw new IllegalStateException("Default　数据源不存在！");
+                throw new IllegalStateException("Default 数据源不存在！");
             }
             defaultDataSource = dataSource;
             DataSourceContext.setDefaultWriteDataSource(writeDs);
@@ -74,7 +73,7 @@ public class DynamicDsRegister implements BeanDefinitionRegistryPostProcessor, A
 
         // 将读写数据源合并
         writeDataSource.putAll(readDataSource);
-        mpv.addPropertyValue("targetDataSources", writeDataSource);
+        mpv.addPropertyValue("targetDataSources", new HashMap<>(writeDataSource));
 
         beanDefinitionRegistry.registerBeanDefinition("dataSource", beanDefinition);
     }
