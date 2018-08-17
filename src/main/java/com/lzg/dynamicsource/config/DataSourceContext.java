@@ -74,6 +74,10 @@ public class DataSourceContext {
         DEFAULT_WRITE_DATA_SOURCE = defaultWriteDataSource;
     }
 
+    public static void setDefaultReadDataSource(String defaultReadDataSource) {
+        DEFAULT_READ_DATA_SOURCE = defaultReadDataSource;
+    }
+
     public static String getDataSource() {
         return DATA_SOURCE.get();
     }

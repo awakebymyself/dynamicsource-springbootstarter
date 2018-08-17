@@ -1,8 +1,6 @@
 package com.lzg.dynamicsource.regist;
 
 import com.lzg.dynamicsource.DynamicDataSource;
-import com.lzg.dynamicsource.annotation.DefaultDataSource;
-import com.lzg.dynamicsource.config.DataSourceContext;
 import com.lzg.dynamicsource.util.DataSourceOperator;
 import com.lzg.dynamicsource.util.Pair;
 import org.slf4j.Logger;
@@ -19,6 +17,7 @@ import org.springframework.context.ApplicationContextAware;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author 刘志钢
@@ -54,18 +53,8 @@ public class DynamicDsRegister implements BeanDefinitionRegistryPostProcessor, A
 
         MutablePropertyValues mpv = beanDefinition.getPropertyValues();
 
-        DataSource defaultDataSource;
-        if (dbClass.isAnnotationPresent(DefaultDataSource.class)) {
-            DefaultDataSource annotation = dbClass.getAnnotation(DefaultDataSource.class);
-            String writeDs = annotation.write();
-
-            DataSource dataSource = dataSourcePair.getLeft().get(writeDs);
-            if (dataSource == null) {
-                throw new IllegalStateException("Default 数据源不存在！");
-            }
-            defaultDataSource = dataSource;
-            DataSourceContext.setDefaultWriteDataSource(writeDs);
-        } else {
+        DataSource defaultDataSource = dataSourceOperator.updateAndGetDefaultDs(dbClass, dataSourcePair);
+        if (Objects.isNull(defaultDataSource)) {
             // 没有指定的默认数据源则使用第一个
             defaultDataSource = writeDataSource.values().stream().findFirst().get();
         }

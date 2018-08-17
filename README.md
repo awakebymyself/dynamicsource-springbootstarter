@@ -12,15 +12,15 @@
 @DisconfFile(fileName = "db.properties")
 public class DbConfig {
 
-    private String masterDriver;
-    private String masterUrl;
-    private String masterUser;
-    private String masterPassword;
+    private String masterWriteDriver;
+    private String masterWriteUrl;
+    private String masterWriteUser;
+    private String masterWritePassword;
 
-    private String slaveDriver;
-    private String slaveUrl;
-    private String slaveUser;
-    private String slavePassword;
+    private String slaveReadDriver;
+    private String slaveReadUrl;
+    private String slaveReadUser;
+    private String slaveReadPassword;
 
     private String activityWriteDriver;
     private String activityWriteUrl;
@@ -72,76 +72,84 @@ public class DbConfig {
         return activityReadPassword;
     }
 
-    @DisconfFileItem(name = "slaveDriver")
-    public String getSlaveDriver() {
-        return slaveDriver;
+    @DisconfFileItem(name = "slaveReadDriver")
+    public String getSlaveReadDriver() {
+        return slaveReadDriver;
     }
 
-    @DisconfFileItem(name = "slaveUrl")
-    public String getSlaveUrl() {
-        return slaveUrl;
+    @DisconfFileItem(name = "slaveReadUrl")
+    public String getSlaveReadUrl() {
+        return slaveReadUrl;
     }
 
-    @DisconfFileItem(name = "slaveUser")
-    public String getSlaveUser() {
-        return slaveUser;
+    @DisconfFileItem(name = "slaveReadUser")
+    public String getSlaveReadUser() {
+        return slaveReadUser;
     }
 
-    @DisconfFileItem(name = "slavePassword")
-    public String getSlavePassword() {
-        return slavePassword;
+    @DisconfFileItem(name = "slaveReadPassword")
+    public String getSlaveReadPassword() {
+        return slaveReadPassword;
     }
 
-    @DisconfFileItem(name = "masterDriver")
-    public String getMasterDriver() {
-        return masterDriver;
+    @DisconfFileItem(name = "masterWriteDriver")
+    public String getMasterWriteDriver() {
+        return masterWriteDriver;
     }
 
-    @DisconfFileItem(name = "masterUrl")
-    public String getMasterUrl() {
-        return masterUrl;
+    @DisconfFileItem(name = "masterWriteUrl")
+    public String getMasterWriteUrl() {
+        return masterWriteUrl;
     }
 
-    @DisconfFileItem(name = "masterUser")
-    public String getMasterUser() {
-        return masterUser;
+    @DisconfFileItem(name = "masterWriteUser")
+    public String getMasterWriteUser() {
+        return masterWriteUser;
     }
 
-    @DisconfFileItem(name = "masterPassword")
-    public String getMasterPassword() {
-        return masterPassword;
+    @DisconfFileItem(name = "masterWritePassword")
+    public String getMasterWritePassword() {
+        return masterWritePassword;
     }
 ```
 
 以上是当前应该程序背景， 使用此starter的方式：
 首先配置启动自动配置选项，在`application.properties`中增加:
 ```java
-// 要进行动态数据源配置的service 方法
+// 要进行动态数据源配置的service 方法, 拦截数据库操作
 dynamic.ds.pointCut= execution (* com.lzg.xxx.service..*.*(..))
 // 启用自动配置
 dynamic.ds.enable=true
 ```
-在`@Configuration` 中增加`@Bean` 配置：
-
+peiz配置shujuy配置数据源zhuce配置数据源注册配置数据源注册测配置数据源注册测类`DynamicDsRegister`
+`JAVA配置:`
 ```java
     @Bean
     public DynamicDsRegister register() {
         return new DynamicDsRegister(xxx.class); //注意这边的xxx.class及为上面disconf托管的配置类！
     }
 ```
+`Xml 配置:`
+
+```xml
+
+<bean id = "dunamicDsRegister" class = "com.lzg.dynamicsource.regist.DynamicDsRegister">
+    <property name = "dbClass" value = "xxx.xxx.xx"/>
+</bean>
+```
 
 **这就是全部所需的配置了，快乐就完事了，同时关于disconf托管的配置类有几处默认的约定需要遵守，如下：**
 
-在配置数据源的时候我们通常会配置`Driver` `Url` `User` `Password`， 这些为配置的保留字，作为字段名的后缀,首字母大写, for example `masterUrl` `slaveUser`
+在配置数据源的时候我们通常会配置`Driver` `Url` `User` `Password`， 这些为配置的保留字，作为字段名的后缀,首字母大写,  如果这个数据源
+是写数据源，那么字段命名为`xxxWriteUrl`, 同理如果为读数据源，那么命名为`xxxReadUrl`. 在应该初始化完成的时候，对应的写数据源名称为
+`xxxWrite`, 读数据源名称为`xxxRead`
 
-#####字段命名方式:
+#####对于上面的DbConfig类:
 
 ```java
-xxxWrite(Url|Driver|Password) write为保留字, xxx即为写数据源名称
+我们的写数据源有：masterWrite 和 activityWrite 两个
 
-同理 读信息配置类似 xxxRead(Url|Driver|Password) write为保留字, xxx即为读数据源名称
-
-如果应用只是简单的一个读写，则可以直接命名为 master(Url|...)为写, slave(Ur;|...) 为读
+读数据源有：slaveRead  和 activityRead 两个
 
 ```
 
@@ -166,7 +174,16 @@ xxxWrite(Url|Driver|Password) write为保留字, xxx即为写数据源名称
  private String ***ReadUrl,***ReadUser... 读配置2 对应数据源名称为***Read
  ```
 
-对于不同库多写多读的情况，无法区别使用哪一个数据源，所有需要在方法层面通过注解指定数据源名称：
+对于不同库多写多读的情况，无法区别使用哪一个数据源, 需要组合注解一起使用
+可以指定程序默认使用的读写库, 在类上面添加注解:
+```java
+
+@DefaultDataSource(write = "xxxWrite", read = "xxxRead")
+public class DbConfig {...}
+```
+这样如果我们没有在方法层面指定数据源，那么就会使用默认的数据源。
+
+指定数据源所需要的是在方法层面通过注解指定数据源名称：
 ```java
   @DynamicDS("xxxWrite") 指定需要使用的数据源名称
     public String hello() {
@@ -180,4 +197,65 @@ xxxWrite(Url|Driver|Password) write为保留字, xxx即为写数据源名称
 
 
 
-## 场景二：基于springboot 配置文件进行的数据源配置(TODO)
+## 场景二：基于springboot 配置文件进行的数据源配置
+
+**许多应该的配置并不是基于Disconf去托管数据库配置文件的，那么可以使用这种配置文件的方式去启动。**
+
+
+**配置方式支持类路径添加或者从外部文件系统加载**
+
+`内部添加：`
+ 在`resources`目录下面添加`dynamic.properties`, 名称约定为这个， 配置数据源如下：
+
+ ```java
+aWriteUrl=aWriteUrl
+aWriteUser=aUser
+aWritePassword=aPassword
+aWriteDriver=aDriver
+
+aReadUrl=abc
+aReadUser=aReadUser
+aReadPassword=aReadPassword
+aReadDriver=aReadDriver
+
+bWriteUrl=bWriteUrl
+bWriteUser=bWriteUser
+bWritePassword=bWritePassword
+bWriteDriver=bWriteDriver
+
+bReadUrl=bReadUrl
+bReadUser=bReadUser
+bReadPassword=bReadReadPassword
+bReadDriver=bReadDriver
+
+bSecondReadUrl=bSecondReadUrl
+bSecondReadUser=bSecondReadUser
+bSecondReadPassword=bSecondReadPassword
+bSecondReadDriver=bSecondReadDriver
+
+ ```
+
+读数据源有：`aRead`, `bRead`, `bSecondRead`
+写数据源有：`aWrite`, `bWrite`
+
+
+`从外部添加：`
+可以在程序启动的时候知道外部文件的路径`System.setProperty("dynamic.path", "xxxpath")` 或者jar运行是设置`-Ddynamic.path=xxxpth`即可
+
+
+
+**具体使用多数据源的场景**
+ 请参考上面Disconf场景说明，唯一一点区别就是在设置默认读写数据源的时候我们没有配置类可以添加注解了，那么我们需要在
+ `springboot` 的默认的配置文件`application.properties`中添加配置:
+
+ ```xml
+ dynamic.ds.defaultWrite=xxxWrite
+
+ dynamic.ds.defaultWrite=xxxRead
+
+ ```
+
+
+###综上两个不同的场景只是在配置数据源上会区别，其他需要的配置几乎一致， 简单易用可维护。
+
+

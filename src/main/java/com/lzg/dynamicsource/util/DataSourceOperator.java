@@ -1,6 +1,7 @@
 package com.lzg.dynamicsource.util;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.lzg.dynamicsource.annotation.DefaultDataSource;
 import com.lzg.dynamicsource.config.DataSourceContext;
 import com.lzg.dynamicsource.regist.DbObject;
 import org.slf4j.Logger;
@@ -43,6 +44,39 @@ public class DataSourceOperator {
         setDataSourceContext(writeDataSource, readDataSource);
 
         return Pair.of(writeDataSource, readDataSource);
+    }
+
+    /**
+     * 获取默认数据源
+     *
+     * @param dbClass        disconf托管的配置类
+     * @param dataSourcePair 保存的读写数据源的pair
+     * @return 默认数据源
+     */
+    public DataSource updateAndGetDefaultDs(Class<?> dbClass,
+                                            Pair<Map<String, DataSource>, Map<String, DataSource>> dataSourcePair) {
+        if (dbClass.isAnnotationPresent(DefaultDataSource.class)) {
+            DefaultDataSource annotation = dbClass.getAnnotation(DefaultDataSource.class);
+            String writeDs = annotation.write();
+            String readDs = annotation.read();
+            return updateAndGetDefaultDs(dataSourcePair, writeDs, readDs);
+        }
+        return null;
+    }
+
+    public DataSource updateAndGetDefaultDs(Pair<Map<String, DataSource>, Map<String, DataSource>> dataSourcePair,
+                                            String writeDs, String readDs) {
+        DataSource writeDataSource = dataSourcePair.getLeft().get(writeDs);
+        DataSource readDataSource = dataSourcePair.getRight().get(readDs);
+        if (writeDataSource == null) {
+            throw new IllegalStateException("Default write 数据源不存在！");
+        }
+        if (readDataSource == null) {
+            throw new IllegalStateException("Default read 数据源不存在！");
+        }
+        DataSourceContext.setDefaultWriteDataSource(writeDs);
+        DataSourceContext.setDefaultReadDataSource(readDs);
+        return writeDataSource;
     }
 
     private DataSource getDataSource(DbObject dbObject) {
