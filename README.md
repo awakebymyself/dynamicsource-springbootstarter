@@ -6,6 +6,8 @@
 
 **特点：目前市面上的自动配置一般都只支持一读一写或者多读一写，难免还会引发重复配置的问题, 此项目支持多读多写的数据源自动配置！**
  
+**Email: lzgsshen@163.com**
+
 
 ## 场景一：Disconf client 托管我们的数据源配置信息
 应用程序在使用Disconf进去配置的时候都是通过配置文件的形式进行配置，如下：
@@ -123,7 +125,7 @@ dynamic.ds.pointCut= execution (* com.lzg.xxx.service..*.*(..))
 // 启用自动配置
 dynamic.ds.enable=true
 ```
-peiz配置shujuy配置数据源zhuce配置数据源注册配置数据源注册测配置数据源注册测类`DynamicDsRegister`
+配置数据源注册测类`DynamicDsRegister`
 `JAVA配置:`
 ```java
     @Bean
