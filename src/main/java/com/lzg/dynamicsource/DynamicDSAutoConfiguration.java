@@ -39,7 +39,6 @@ public class DynamicDSAutoConfiguration {
     public DataSource dataSource() {
         Map<String, DbObject> dbObjectMap = PropertiesLoader.loadDynamicFile();
 
-
         Pair<Map<String, DataSource>, Map<String, DataSource>> dataSourcePair = dataSourceOperator
                 .getAndOperateDataSource(dbObjectMap, true);
 

@@ -15,20 +15,15 @@ import java.util.concurrent.atomic.AtomicLong;
 public class DataSourceContext {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceContext.class);
-
-    private static String DEFAULT_WRITE_DATA_SOURCE = "";
-    private static String DEFAULT_READ_DATA_SOURCE = "";
-
-    private static final ThreadLocal<String> DATA_SOURCE = ThreadLocal.withInitial(()
-            -> DEFAULT_WRITE_DATA_SOURCE);
-
     //写数据源对应的keys
     private static final List<String> writeDsKeys = new ArrayList<>();
-
     // 读数据源对应的keys
     private static final List<String> readDsKeys = new ArrayList<>();
-
     private static final AtomicLong counter = new AtomicLong(0);
+    private static String DEFAULT_WRITE_DATA_SOURCE = "";
+    private static final ThreadLocal<String> DATA_SOURCE = ThreadLocal.withInitial(()
+            -> DEFAULT_WRITE_DATA_SOURCE);
+    private static String DEFAULT_READ_DATA_SOURCE = "";
 
     public static void useDefaultWriteDs() {
         LOGGER.debug("Use default write DATA_SOURCE");
@@ -75,19 +70,19 @@ public class DataSourceContext {
         writeDsKeys.addAll(keys);
     }
 
-    public static void setDataSource(String dataSource) {
-        if (!writeDsKeys.contains(dataSource) && !readDsKeys.contains(dataSource)) {
-            throw new IllegalStateException("DataSource key doesn't exist!");
-        }
-        DATA_SOURCE.set(dataSource);
-    }
-
     public static void setDefaultWriteDataSource(String defaultWriteDataSource) {
         DEFAULT_WRITE_DATA_SOURCE = defaultWriteDataSource;
     }
 
     public static String getDataSource() {
         return DATA_SOURCE.get();
+    }
+
+    public static void setDataSource(String dataSource) {
+        if (!writeDsKeys.contains(dataSource) && !readDsKeys.contains(dataSource)) {
+            throw new IllegalStateException("DataSource key doesn't exist!");
+        }
+        DATA_SOURCE.set(dataSource);
     }
 
     public static void clear() {

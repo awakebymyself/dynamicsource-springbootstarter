@@ -28,8 +28,8 @@ public class DynamicDsRegister implements BeanDefinitionRegistryPostProcessor, A
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicDsRegister.class);
 
     private final Class<?> dbClass;
-    private ApplicationContext applicationContext;
     private final DataSourceOperator dataSourceOperator = DataSourceOperator.getInstance();
+    private ApplicationContext applicationContext;
 
     public DynamicDsRegister(Class<?> dbClass) {
         this.dbClass = dbClass;

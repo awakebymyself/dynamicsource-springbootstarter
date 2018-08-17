@@ -1,7 +1,5 @@
 package com.lzg.dynamicsource.regist;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 /**
  * @author 刘志钢
  */
@@ -55,7 +53,7 @@ public class DbObject {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("DbObject{");
+        final StringBuilder sb = new StringBuilder("DbObject{");
         sb.append("user='").append(user).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", driver='").append(driver).append('\'');

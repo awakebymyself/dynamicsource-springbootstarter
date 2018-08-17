@@ -9,7 +9,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.lzg.dynamicsource.config.Constants.*;
+import static com.lzg.dynamicsource.config.Constants.DRIVER_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.MASTER_PREFIX;
+import static com.lzg.dynamicsource.config.Constants.PASS_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.URL_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.USER_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.WRITE_DATASOURCE;
 
 /**
  * @author 刘志钢
@@ -17,11 +22,9 @@ import static com.lzg.dynamicsource.config.Constants.*;
 public abstract class AbstractFieldFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFieldFilter.class);
-
-    private final Object object;
-    final String prefix;
     protected final Map<String, DbObject> dbObjectMap;
-
+    final String prefix;
+    private final Object object;
     private AbstractFieldFilter nextFilter;
 
     AbstractFieldFilter(String prefix, Object o, Map<String, DbObject> dbObjectMap) {

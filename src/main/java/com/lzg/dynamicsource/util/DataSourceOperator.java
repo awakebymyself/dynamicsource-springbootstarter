@@ -17,11 +17,14 @@ public class DataSourceOperator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceOperator.class);
 
+    private DataSourceOperator() {
+    }
+
     public static DataSourceOperator getInstance() {
         return InstanceHolder.INSTANCE;
     }
 
-    public Pair<Map<String, DataSource>, Map<String, DataSource> > getAndOperateDataSource(
+    public Pair<Map<String, DataSource>, Map<String, DataSource>> getAndOperateDataSource(
             Map<String, DbObject> dbObjectMap, boolean log) {
         Map<String, DataSource> writeDataSource = new HashMap<>();
         Map<String, DataSource> readDataSource = new HashMap<>();
@@ -64,13 +67,9 @@ public class DataSourceOperator {
 
     private void logDataSource(Map<String, DataSource> writeDataSource, Map<String, DataSource> readDataSource) {
         LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>Write DataSource<<<<<<<<<<<<<<<<<<<<<<<");
-        writeDataSource.forEach((key,ds) -> {
-            LOGGER.info("Write DataSource Name: {}, DataSource Value: {}", key, ds);
-        });
+        writeDataSource.forEach((key, ds) -> LOGGER.info("Write DataSource Name: {}, DataSource Value: {}", key, ds));
         LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>Read DataSource<<<<<<<<<<<<<<<<<<<<<<<");
-        readDataSource.forEach((key,ds) -> {
-            LOGGER.info("Read DataSource Name: {}, DataSource Value: {}", key, ds);
-        });
+        readDataSource.forEach((key, ds) -> LOGGER.info("Read DataSource Name: {}, DataSource Value: {}", key, ds));
     }
 
     private void setDataSourceContext(Map<String, DataSource> writeDataSource,
@@ -79,9 +78,6 @@ public class DataSourceOperator {
                 .collect(Collectors.toList()));
         DataSourceContext.setWriteDsKeys(writeDataSource.keySet().stream().map(String::valueOf)
                 .collect(Collectors.toList()));
-    }
-
-    private DataSourceOperator() {
     }
 
     private static final class InstanceHolder {

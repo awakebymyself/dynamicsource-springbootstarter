@@ -11,12 +11,14 @@ public @interface DefaultDataSource {
 
     /**
      * 指定默认的写数据源
+     *
      * @return write
      */
     String write();
 
     /**
      * 指定默认的读数据源
+     *
      * @return read
      */
     String read();

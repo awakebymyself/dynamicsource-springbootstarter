@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 指定动态数据源
+ *
  * @author 刘志钢
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -15,6 +16,7 @@ public @interface DynamicDS {
 
     /**
      * 指定数据源的名称
+     *
      * @return value
      */
     String value();

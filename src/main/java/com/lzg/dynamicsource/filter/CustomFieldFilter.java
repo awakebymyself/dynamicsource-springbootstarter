@@ -7,10 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static com.lzg.dynamicsource.config.Constants.*;
+import static com.lzg.dynamicsource.config.Constants.MASTER_PREFIX;
+import static com.lzg.dynamicsource.config.Constants.PATTERN;
+import static com.lzg.dynamicsource.config.Constants.SLAVE_PREFIX;
 
 /**
  * @author 刘志钢
@@ -58,7 +59,7 @@ public class CustomFieldFilter extends AbstractFieldFilter {
                     if (matcher.matches()) {
                         String key = matcher.group(1);
                         String writeOrRead = matcher.group(2);
-                        return key +writeOrRead; //e.g. mapKey = alphaWrite
+                        return key + writeOrRead; //e.g. mapKey = alphaWrite
                     }
                     throw new IllegalStateException("Field :" + f.getName() + " name is not valid!");
                 }, Collectors.toList()));

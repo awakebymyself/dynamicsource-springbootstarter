@@ -17,9 +17,7 @@ public class Constants {
 
     public static final String WRITE_DATASOURCE = "Write";
     public static final String Read_DATASOURCE = "Read";
-
-    public static final String[] READ_DATASOURCE_PREFIX = {"select", "get", "query", "find"};
-
     public static final Pattern PATTERN = Pattern.compile("([a-zA-Z]+)(Write|Read)(Url|Driver|Password|User)$");
+    static final String[] READ_DATASOURCE_PREFIX = {"select", "get", "query", "find"};
 
 }

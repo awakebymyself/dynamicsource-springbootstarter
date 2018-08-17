@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assumptions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  * @author 刘志钢
@@ -32,7 +32,7 @@ class PropertiesLoaderTest {
     @Tag("external")
     @Disabled
     void loadPropertiesFromExternal() {
-        System.setProperty("dynamic.path","C:\\usr\\local\\config\\dynamic.properties");
+        System.setProperty("dynamic.path", "C:\\usr\\local\\config\\dynamic.properties");
 
         loadDynamicFile();
     }
