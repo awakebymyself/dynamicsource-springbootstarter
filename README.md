@@ -137,7 +137,7 @@ dynamic.ds.enable=true
 
 ```xml
 
-<bean id = "dunamicDsRegister" class = "com.lzg.dynamicsource.regist.DynamicDsRegister">
+<bean id = "dunamicDsRegister" class = "DynamicDsRegister">
     <property name = "dbClass" value = "xxx.xxx.xx"/>
 </bean>
 ```

@@ -1,10 +1,10 @@
-package com.lzg.dynamicsource;
+package com.ymatou.dynamicsource;
 
-import com.lzg.dynamicsource.config.DaoMapperAdvice;
-import com.lzg.dynamicsource.regist.DbObject;
-import com.lzg.dynamicsource.util.DataSourceOperator;
-import com.lzg.dynamicsource.util.Pair;
-import com.lzg.dynamicsource.util.PropertiesLoader;
+import com.ymatou.dynamicsource.config.DaoMapperAdvice;
+import com.ymatou.dynamicsource.regist.DbObject;
+import com.ymatou.dynamicsource.util.DataSourceOperator;
+import com.ymatou.dynamicsource.util.Pair;
+import com.ymatou.dynamicsource.util.PropertiesLoader;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;

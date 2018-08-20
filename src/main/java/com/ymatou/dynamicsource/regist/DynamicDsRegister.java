@@ -1,8 +1,8 @@
-package com.lzg.dynamicsource.regist;
+package com.ymatou.dynamicsource.regist;
 
-import com.lzg.dynamicsource.DynamicDataSource;
-import com.lzg.dynamicsource.util.DataSourceOperator;
-import com.lzg.dynamicsource.util.Pair;
+import com.ymatou.dynamicsource.DynamicDataSource;
+import com.ymatou.dynamicsource.util.DataSourceOperator;
+import com.ymatou.dynamicsource.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;

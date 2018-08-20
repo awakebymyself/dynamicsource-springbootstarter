@@ -1,6 +1,6 @@
-package com.lzg.dynamicsource.filter;
+package com.ymatou.dynamicsource.filter;
 
-import com.lzg.dynamicsource.regist.DbObject;
+import com.ymatou.dynamicsource.regist.DbObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,12 +9,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.lzg.dynamicsource.config.Constants.DRIVER_SUFFIX;
-import static com.lzg.dynamicsource.config.Constants.MASTER_PREFIX;
-import static com.lzg.dynamicsource.config.Constants.PASS_SUFFIX;
-import static com.lzg.dynamicsource.config.Constants.URL_SUFFIX;
-import static com.lzg.dynamicsource.config.Constants.USER_SUFFIX;
-import static com.lzg.dynamicsource.config.Constants.WRITE_DATASOURCE;
+import static com.ymatou.dynamicsource.config.Constants.DRIVER_SUFFIX;
+import static com.ymatou.dynamicsource.config.Constants.MASTER_PREFIX;
+import static com.ymatou.dynamicsource.config.Constants.PASS_SUFFIX;
+import static com.ymatou.dynamicsource.config.Constants.URL_SUFFIX;
+import static com.ymatou.dynamicsource.config.Constants.USER_SUFFIX;
+import static com.ymatou.dynamicsource.config.Constants.WRITE_DATASOURCE;
 
 /**
  * @author 刘志钢
@@ -73,10 +73,6 @@ public abstract class AbstractFieldFilter {
         getFieldValuePerSuffix(field, USER_SUFFIX).ifPresent(dbObject::setUser);
         getFieldValuePerSuffix(field, URL_SUFFIX).ifPresent(dbObject::setUrl);
         dbObject.setWrite(Objects.equals(WRITE_DATASOURCE, writeOrRead));
-    }
-
-    void setNextFilter(AbstractFieldFilter nextFilter) {
-        this.nextFilter = nextFilter;
     }
 
 }

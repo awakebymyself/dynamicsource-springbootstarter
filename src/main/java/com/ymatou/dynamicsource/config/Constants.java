@@ -1,4 +1,4 @@
-package com.lzg.dynamicsource.config;
+package com.ymatou.dynamicsource.config;
 
 import java.util.regex.Pattern;
 

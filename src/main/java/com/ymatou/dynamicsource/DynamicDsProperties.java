@@ -1,4 +1,4 @@
-package com.lzg.dynamicsource;
+package com.ymatou.dynamicsource;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

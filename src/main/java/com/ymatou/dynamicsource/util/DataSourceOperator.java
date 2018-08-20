@@ -1,9 +1,9 @@
-package com.lzg.dynamicsource.util;
+package com.ymatou.dynamicsource.util;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.lzg.dynamicsource.annotation.DefaultDataSource;
-import com.lzg.dynamicsource.config.DataSourceContext;
-import com.lzg.dynamicsource.regist.DbObject;
+import com.ymatou.dynamicsource.annotation.DefaultDataSource;
+import com.ymatou.dynamicsource.config.DataSourceContext;
+import com.ymatou.dynamicsource.regist.DbObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,9 +101,11 @@ public class DataSourceOperator {
 
     private void logDataSource(Map<String, DataSource> writeDataSource, Map<String, DataSource> readDataSource) {
         LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>Write DataSource<<<<<<<<<<<<<<<<<<<<<<<");
-        writeDataSource.forEach((key, ds) -> LOGGER.info("Write DataSource Name: {}, DataSource Value: {}", key, ds));
+        writeDataSource.forEach((key, ds) -> LOGGER.info("Write DataSource Name: {}, DataSource Value: {}", key,
+                ((DruidDataSource)ds).getUrl()));
         LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>Read DataSource<<<<<<<<<<<<<<<<<<<<<<<");
-        readDataSource.forEach((key, ds) -> LOGGER.info("Read DataSource Name: {}, DataSource Value: {}", key, ds));
+        readDataSource.forEach((key, ds) -> LOGGER.info("Read DataSource Name: {}, DataSource Value: {}", key,
+                ((DruidDataSource)ds).getUrl()));
     }
 
     private void setDataSourceContext(Map<String, DataSource> writeDataSource,

@@ -1,6 +1,7 @@
-package com.lzg.dynamicsource.filter;
+package com.ymatou.dynamicsource.filter;
 
-import com.lzg.dynamicsource.regist.DbObject;
+import com.ymatou.dynamicsource.regist.DbObject;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -14,12 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FieldFilterChainTest {
 
     @Test
+    @Disabled
     public void parseFields() {
         TestObject testObject = new TestObject();
         testObject.setAlphaWriteUrl("alphaWriteUrl");
-        testObject.setMasterUrl("masterUrl");
+        testObject.setMasterWriteUrl("masterWriteUrl");
         testObject.setBetaReadUser("betaReadUser");
-        testObject.setSlaveDriver("slaveDriver");
+        testObject.setSlaveReadDriver("slaveReadDriver");
         testObject.setAlphaWriteDriver("alphaWriteDriver");
 
         Field[] fields = testObject.getClass().getDeclaredFields();
@@ -31,9 +33,9 @@ public class FieldFilterChainTest {
 
 
     private static class TestObject {
-        private String masterUrl;
+        private String masterWriteUrl;
 
-        private String slaveDriver;
+        private String slaveReadDriver;
 
         private String alphaWriteUrl;
         private String alphaWriteDriver;
@@ -48,20 +50,20 @@ public class FieldFilterChainTest {
             this.alphaWriteDriver = alphaWriteDriver;
         }
 
-        public String getMasterUrl() {
-            return masterUrl;
+        public String getMasterWriteUrl() {
+            return masterWriteUrl;
         }
 
-        public void setMasterUrl(String masterUrl) {
-            this.masterUrl = masterUrl;
+        public void setMasterWriteUrl(String masterWriteUrl) {
+            this.masterWriteUrl = masterWriteUrl;
         }
 
-        public String getSlaveDriver() {
-            return slaveDriver;
+        public String getSlaveReadDriver() {
+            return slaveReadDriver;
         }
 
-        public void setSlaveDriver(String slaveDriver) {
-            this.slaveDriver = slaveDriver;
+        public void setSlaveReadDriver(String slaveReadDriver) {
+            this.slaveReadDriver = slaveReadDriver;
         }
 
         public String getAlphaWriteUrl() {

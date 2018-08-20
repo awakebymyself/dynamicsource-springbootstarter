@@ -1,4 +1,4 @@
-package com.lzg.dynamicsource.config;
+package com.ymatou.dynamicsource.config;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

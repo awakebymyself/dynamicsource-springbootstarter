@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.lzg.dynamicsource</groupId>
+    <groupId>com.ymatou.dynamicsource</groupId>
     <artifactId>dynamicsource-spring-boot-starter</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2.3.RELEASE</version>
 
     <name>dynamicsource-spring-boot-starter</name>
 
@@ -21,13 +21,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>1.4.1.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.0.8.RELEASE</version>
+            <version>4.3.3.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>5.0.8.RELEASE</version>
+            <version>4.3.3.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -96,4 +96,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://172.16.100.98/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Release Repository</name>
+            <url>http://172.16.100.98/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>

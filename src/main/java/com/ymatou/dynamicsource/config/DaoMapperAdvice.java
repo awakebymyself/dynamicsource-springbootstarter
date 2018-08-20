@@ -1,6 +1,6 @@
-package com.lzg.dynamicsource.config;
+package com.ymatou.dynamicsource.config;
 
-import com.lzg.dynamicsource.annotation.DynamicDS;
+import com.ymatou.dynamicsource.annotation.DynamicDS;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.lzg.dynamicsource.config.Constants.READ_DATASOURCE_PREFIX;
+import static com.ymatou.dynamicsource.config.Constants.READ_DATASOURCE_PREFIX;
 
 public class DaoMapperAdvice implements MethodInterceptor {
 

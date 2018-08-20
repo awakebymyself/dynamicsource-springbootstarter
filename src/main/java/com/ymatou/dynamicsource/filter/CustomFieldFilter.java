@@ -1,6 +1,6 @@
-package com.lzg.dynamicsource.filter;
+package com.ymatou.dynamicsource.filter;
 
-import com.lzg.dynamicsource.regist.DbObject;
+import com.ymatou.dynamicsource.regist.DbObject;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
-import static com.lzg.dynamicsource.config.Constants.MASTER_PREFIX;
-import static com.lzg.dynamicsource.config.Constants.PATTERN;
-import static com.lzg.dynamicsource.config.Constants.SLAVE_PREFIX;
+import static com.ymatou.dynamicsource.config.Constants.MASTER_PREFIX;
+import static com.ymatou.dynamicsource.config.Constants.PATTERN;
+import static com.ymatou.dynamicsource.config.Constants.SLAVE_PREFIX;
 
 /**
  * @author 刘志钢

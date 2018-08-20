@@ -1,4 +1,4 @@
-package com.lzg.dynamicsource.annotation;
+package com.ymatou.dynamicsource.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

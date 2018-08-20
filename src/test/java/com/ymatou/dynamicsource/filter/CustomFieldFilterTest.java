@@ -1,11 +1,11 @@
-package com.lzg.dynamicsource.filter;
+package com.ymatou.dynamicsource.filter;
 
 
+import com.ymatou.dynamicsource.config.Constants;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;
 
-import static com.lzg.dynamicsource.config.Constants.PATTERN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -16,7 +16,7 @@ public class CustomFieldFilterTest {
     @Test
     void regexTest() {
         String tested = "masterWriteDriver";
-        Matcher matcher = PATTERN.matcher(tested);
+        Matcher matcher = Constants.PATTERN.matcher(tested);
 
         System.out.println(matcher.matches());
         assertEquals("master", matcher.group(1));
