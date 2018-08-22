@@ -6,7 +6,7 @@
 
     <groupId>com.ymatou.dynamicsource</groupId>
     <artifactId>dynamicsource-spring-boot-starter</artifactId>
-    <version>1.2.3.RELEASE</version>
+    <version>1.2.4.RELEASE</version>
 
     <name>dynamicsource-spring-boot-starter</name>
 
@@ -46,6 +46,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
