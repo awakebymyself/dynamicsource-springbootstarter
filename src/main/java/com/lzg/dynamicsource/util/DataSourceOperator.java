@@ -1,9 +1,9 @@
-package com.ymatou.dynamicsource.util;
+package com.lzg.dynamicsource.util;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.ymatou.dynamicsource.annotation.DefaultDataSource;
-import com.ymatou.dynamicsource.config.DataSourceContext;
-import com.ymatou.dynamicsource.regist.DbObject;
+import com.lzg.dynamicsource.annotation.DefaultDataSource;
+import com.lzg.dynamicsource.regist.DbObject;
+import com.lzg.dynamicsource.config.DataSourceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

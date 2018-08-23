@@ -1,6 +1,6 @@
-package com.ymatou.dynamicsource.util;
+package com.lzg.dynamicsource.util;
 
-import com.ymatou.dynamicsource.regist.DbObject;
+import com.lzg.dynamicsource.regist.DbObject;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

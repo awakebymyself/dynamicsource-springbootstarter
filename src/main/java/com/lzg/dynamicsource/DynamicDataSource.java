@@ -1,6 +1,6 @@
-package com.ymatou.dynamicsource;
+package com.lzg.dynamicsource;
 
-import com.ymatou.dynamicsource.config.DataSourceContext;
+import com.lzg.dynamicsource.config.DataSourceContext;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 public class DynamicDataSource extends AbstractRoutingDataSource {

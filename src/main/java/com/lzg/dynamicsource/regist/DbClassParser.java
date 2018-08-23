@@ -1,6 +1,6 @@
-package com.ymatou.dynamicsource.regist;
+package com.lzg.dynamicsource.regist;
 
-import com.ymatou.dynamicsource.filter.FieldFilterChain;
+import com.lzg.dynamicsource.filter.FieldFilterChain;
 import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.Field;

@@ -1,4 +1,4 @@
-package com.ymatou.dynamicsource.regist;
+package com.lzg.dynamicsource.regist;
 
 /**
  * @author 刘志钢

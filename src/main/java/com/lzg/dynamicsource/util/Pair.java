@@ -1,4 +1,4 @@
-package com.ymatou.dynamicsource.util;
+package com.lzg.dynamicsource.util;
 
 public class Pair<L, R> {
 

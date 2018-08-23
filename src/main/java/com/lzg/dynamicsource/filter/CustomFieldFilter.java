@@ -1,6 +1,6 @@
-package com.ymatou.dynamicsource.filter;
+package com.lzg.dynamicsource.filter;
 
-import com.ymatou.dynamicsource.regist.DbObject;
+import com.lzg.dynamicsource.regist.DbObject;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -9,9 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
-import static com.ymatou.dynamicsource.config.Constants.MASTER_PREFIX;
-import static com.ymatou.dynamicsource.config.Constants.PATTERN;
-import static com.ymatou.dynamicsource.config.Constants.SLAVE_PREFIX;
+import static com.lzg.dynamicsource.config.Constants.PATTERN;
 
 /**
  * @author 刘志钢
@@ -42,6 +40,9 @@ public class CustomFieldFilter extends AbstractFieldFilter {
             String writeOrRead = matcher.group(2);
 
             DbObject dbObject = dbObjectMap.get(key + writeOrRead);
+            if (dbObject == null) {
+                throw new IllegalStateException("当前数据源: " + key + writeOrRead + "不存在！");
+            }
             setFiledValue(field, dbObject, writeOrRead);
         } else {
             throw new IllegalStateException("Field :" + field.getName() + " name is not valid, name " +
@@ -50,10 +51,8 @@ public class CustomFieldFilter extends AbstractFieldFilter {
     }
 
     private Map<String, List<Field>> groupFields(Field[] fields) {
-        List<Field> fieldList = Arrays.stream(fields).filter(field -> !field.getName().startsWith(MASTER_PREFIX)
-                && !field.getName().startsWith(SLAVE_PREFIX)).collect(Collectors.toList());
 
-        return fieldList.stream().filter(f -> PATTERN.matcher(f.getName()).matches())
+        return Arrays.stream(fields).filter(f -> PATTERN.matcher(f.getName()).matches())
                 .collect(Collectors.groupingBy(f -> {
                     Matcher matcher = PATTERN.matcher(f.getName());
                     if (matcher.matches()) {

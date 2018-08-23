@@ -1,6 +1,6 @@
-package com.ymatou.dynamicsource.util;
+package com.lzg.dynamicsource.util;
 
-import com.ymatou.dynamicsource.regist.DbObject;
+import com.lzg.dynamicsource.regist.DbObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +17,12 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.regex.Matcher;
 
-import static com.ymatou.dynamicsource.config.Constants.DRIVER_SUFFIX;
-import static com.ymatou.dynamicsource.config.Constants.PASS_SUFFIX;
-import static com.ymatou.dynamicsource.config.Constants.PATTERN;
-import static com.ymatou.dynamicsource.config.Constants.URL_SUFFIX;
-import static com.ymatou.dynamicsource.config.Constants.USER_SUFFIX;
-import static com.ymatou.dynamicsource.config.Constants.WRITE_DATASOURCE;
+import static com.lzg.dynamicsource.config.Constants.DRIVER_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.PASS_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.PATTERN;
+import static com.lzg.dynamicsource.config.Constants.URL_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.USER_SUFFIX;
+import static com.lzg.dynamicsource.config.Constants.WRITE_DATASOURCE;
 
 public final class PropertiesLoader {
 
