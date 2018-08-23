@@ -1,6 +1,6 @@
-package com.github.lzg.dynamicsource.filter;
+package com.github.awakebymyself.filter;
 
-import com.github.lzg.dynamicsource.regist.DbObject;
+import com.github.awakebymyself.regist.DbObject;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
-import static com.github.lzg.dynamicsource.config.Constants.PATTERN;
+import static com.github.awakebymyself.config.Constants.PATTERN;
 
 /**
  * @author 刘志钢

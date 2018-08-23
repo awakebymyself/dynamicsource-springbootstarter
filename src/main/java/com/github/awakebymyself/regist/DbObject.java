@@ -1,4 +1,4 @@
-package com.github.lzg.dynamicsource.regist;
+package com.github.awakebymyself.regist;
 
 /**
  * @author 刘志钢

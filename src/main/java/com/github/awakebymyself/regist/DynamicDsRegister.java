@@ -1,8 +1,8 @@
-package com.github.lzg.dynamicsource.regist;
+package com.github.awakebymyself.regist;
 
-import com.github.lzg.dynamicsource.DynamicDataSource;
-import com.github.lzg.dynamicsource.util.DataSourceOperator;
-import com.github.lzg.dynamicsource.util.Pair;
+import com.github.awakebymyself.DynamicDataSource;
+import com.github.awakebymyself.util.DataSourceOperator;
+import com.github.awakebymyself.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;

@@ -1,7 +1,7 @@
-package com.github.lzg.dynamicsource.filter;
+package com.github.awakebymyself.filter;
 
 
-import com.github.lzg.dynamicsource.config.Constants;
+import com.github.awakebymyself.config.Constants;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;

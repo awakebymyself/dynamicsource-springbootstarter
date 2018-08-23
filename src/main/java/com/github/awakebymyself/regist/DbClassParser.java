@@ -1,6 +1,6 @@
-package com.github.lzg.dynamicsource.regist;
+package com.github.awakebymyself.regist;
 
-import com.github.lzg.dynamicsource.filter.FieldFilterChain;
+import com.github.awakebymyself.filter.FieldFilterChain;
 import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.Field;

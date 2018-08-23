@@ -1,6 +1,6 @@
-package com.github.lzg.dynamicsource.filter;
+package com.github.awakebymyself.filter;
 
-import com.github.lzg.dynamicsource.regist.DbObject;
+import com.github.awakebymyself.regist.DbObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,12 +9,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.github.lzg.dynamicsource.config.Constants.DRIVER_SUFFIX;
-import static com.github.lzg.dynamicsource.config.Constants.MASTER_PREFIX;
-import static com.github.lzg.dynamicsource.config.Constants.PASS_SUFFIX;
-import static com.github.lzg.dynamicsource.config.Constants.URL_SUFFIX;
-import static com.github.lzg.dynamicsource.config.Constants.USER_SUFFIX;
-import static com.github.lzg.dynamicsource.config.Constants.WRITE_DATASOURCE;
+import static com.github.awakebymyself.config.Constants.DRIVER_SUFFIX;
+import static com.github.awakebymyself.config.Constants.MASTER_PREFIX;
+import static com.github.awakebymyself.config.Constants.PASS_SUFFIX;
+import static com.github.awakebymyself.config.Constants.URL_SUFFIX;
+import static com.github.awakebymyself.config.Constants.USER_SUFFIX;
+import static com.github.awakebymyself.config.Constants.WRITE_DATASOURCE;
 
 /**
  * @author 刘志钢

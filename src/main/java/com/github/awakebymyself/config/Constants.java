@@ -1,4 +1,4 @@
-package com.github.lzg.dynamicsource.config;
+package com.github.awakebymyself.config;
 
 import java.util.regex.Pattern;
 

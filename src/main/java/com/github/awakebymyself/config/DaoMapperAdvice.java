@@ -1,6 +1,6 @@
-package com.github.lzg.dynamicsource.config;
+package com.github.awakebymyself.config;
 
-import com.github.lzg.dynamicsource.annotation.DynamicDS;
+import com.github.awakebymyself.annotation.DynamicDS;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;

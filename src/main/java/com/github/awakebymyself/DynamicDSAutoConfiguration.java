@@ -1,10 +1,10 @@
-package com.github.lzg.dynamicsource;
+package com.github.awakebymyself;
 
-import com.github.lzg.dynamicsource.config.DaoMapperAdvice;
-import com.github.lzg.dynamicsource.regist.DbObject;
-import com.github.lzg.dynamicsource.util.DataSourceOperator;
-import com.github.lzg.dynamicsource.util.Pair;
-import com.github.lzg.dynamicsource.util.PropertiesLoader;
+import com.github.awakebymyself.config.DaoMapperAdvice;
+import com.github.awakebymyself.regist.DbObject;
+import com.github.awakebymyself.util.DataSourceOperator;
+import com.github.awakebymyself.util.Pair;
+import com.github.awakebymyself.util.PropertiesLoader;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;

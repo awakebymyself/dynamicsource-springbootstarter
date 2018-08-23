@@ -1,4 +1,4 @@
-package com.github.lzg.dynamicsource.annotation;
+package com.github.awakebymyself.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

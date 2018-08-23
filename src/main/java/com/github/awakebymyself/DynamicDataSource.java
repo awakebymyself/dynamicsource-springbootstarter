@@ -1,6 +1,6 @@
-package com.github.lzg.dynamicsource;
+package com.github.awakebymyself;
 
-import com.github.lzg.dynamicsource.config.DataSourceContext;
+import com.github.awakebymyself.config.DataSourceContext;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 public class DynamicDataSource extends AbstractRoutingDataSource {

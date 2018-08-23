@@ -1,4 +1,4 @@
-package com.github.lzg.dynamicsource;
+package com.github.awakebymyself;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

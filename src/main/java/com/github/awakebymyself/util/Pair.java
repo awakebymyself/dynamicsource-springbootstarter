@@ -1,4 +1,4 @@
-package com.github.lzg.dynamicsource.util;
+package com.github.awakebymyself.util;
 
 public class Pair<L, R> {
 

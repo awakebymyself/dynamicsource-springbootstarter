@@ -1,6 +1,6 @@
-package com.github.lzg.dynamicsource.filter;
+package com.github.awakebymyself.filter;
 
-import com.github.lzg.dynamicsource.regist.DbObject;
+import com.github.awakebymyself.regist.DbObject;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

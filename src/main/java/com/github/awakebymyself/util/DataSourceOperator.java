@@ -1,9 +1,9 @@
-package com.github.lzg.dynamicsource.util;
+package com.github.awakebymyself.util;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.lzg.dynamicsource.annotation.DefaultDataSource;
-import com.github.lzg.dynamicsource.regist.DbObject;
-import com.github.lzg.dynamicsource.config.DataSourceContext;
+import com.github.awakebymyself.annotation.DefaultDataSource;
+import com.github.awakebymyself.regist.DbObject;
+import com.github.awakebymyself.config.DataSourceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
