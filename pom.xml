@@ -4,11 +4,36 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.awakebymyself </groupId>
+    <groupId>com.github.awakebymyself</groupId>
     <artifactId>dynamicsource-spring-boot-starter</artifactId>
     <version>1.2.4.RELEASE</version>
 
     <name>dynamicsource-spring-boot-starter</name>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/awakebymyself/dynamicsource-springbootstarter</url>
+        <connection>https://github.com/awakebymyself/dynamicsource-springbootstarter.git</connection>
+        <developerConnection>https://github.com/awakebymyself/dynamicsource-springbootstarter</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>liuzhigang</name>
+            <email>lzgsshen@163.com</email>
+            <url>https://github.com/awakebymyself/dynamicsource-springbootstarter</url>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +42,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
@@ -86,16 +110,15 @@
     </build>
 
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://172.16.100.98/nexus/content/repositories/releases/</url>
-        </repository>
         <snapshotRepository>
-            <id>snapshots</id>
-            <name>Nexus Release Repository</name>
-            <url>http://172.16.100.98/nexus/content/repositories/snapshots/</url>
+            <id>dynamic-release</id><!-- settings.xml中server节点的id-->
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </snapshotRepository>
+        <repository>
+            <id>dynamic-release</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+
     </distributionManagement>
 
 </project>
